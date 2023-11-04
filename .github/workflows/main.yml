@@ -11,7 +11,7 @@ jobs:
         with:
           fetch-depth: 0
       - name: print trigger details
-        run: 
+        run:
           echo ${{ github.event.client_payload.github.action }}
           echo ${{ github.event.client_payload.github.actor }}
           
