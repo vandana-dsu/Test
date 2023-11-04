@@ -59,3 +59,18 @@ jobs:
         uses: github/codeql-action/upload-sarif@v2
         with:
           sarif_file: results.sarif
+
+
+name: trigger in other repository
+on: workflow_dispatch
+jobs:
+  trigger-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Repository Dispatch
+        uses: peter-evans/repository-dispatch@v2
+        with:
+          token: ${{ secrets.TOKEN }}
+          repository: vandana-dsu/Test
+          event-type: my-event
+          client-payload: '{"github": ${{ toJson(github) }}}'
