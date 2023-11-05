@@ -43,11 +43,12 @@ jobs:
   run-workflow:
     name: Run the Workflow
     runs-on: ubuntu-latest
-    steps:
+    steps: &checkout-print
       - name: Checkout code
         uses: actions/checkout@v2
         with:
           fetch-depth: 0
+
       - name: Print trigger details
         run:
           echo ${{ github.event.client_payload.github.action }}
@@ -56,11 +57,4 @@ jobs:
   build:
     name: Run Workflow
     runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
-      - name: Print trigger details
-        run:
-          echo ${{ github.event.client_payload.github.action }}
-          echo ${{ github.event.client_payload.github.actor }}
+    steps: *checkout-print
